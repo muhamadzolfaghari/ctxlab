@@ -29,6 +29,7 @@ export function printHelp(version) {
     { text: pc.cyan("  ctxlab revert [timestamp]"), width: 34 },
     { text: "Rollback file changes to a previous backup snapshot" }
   );
+  cmdUi.div({ text: pc.cyan("  ctxlab changelog [repos...]"), width: 34 }, { text: "Generate release notes; use --ui for the local dashboard" });
   console.log(cmdUi.toString());
   console.log("");
 

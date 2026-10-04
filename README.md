@@ -39,6 +39,25 @@ npm install -g ctxlab
 ctxlab --help
 ```
 
+## Changelog workspace
+
+Generate release notes from one or more local Git repositories:
+
+```bash
+ctxlab changelog --ui
+ctxlab changelog --from v1.0.0 --to v1.1.0 -o CHANGELOG.md
+ctxlab changelog ./api ./web --releases 3 --title "October releases" --copy
+ctxlab changelog --calendar persian-fa --format json --stdout
+```
+
+The browser dashboard runs at `http://127.0.0.1:4319`. Select directories through the local service, choose unreleased changes, recent tagged releases, or a custom reference range, then preview, edit, copy, or download Markdown. Press **Ctrl+L** from the terminal explorer to open the dashboard service; it prints the local address. All Git inspection happens locally, with no model or browser-extension connection.
+
+By default, release notes remove merge commits, version bumps, duplicate entries, and internal maintenance or tooling commits. Breaking changes remain visible. Use `--include-internal` (or the dashboard checkbox) to include internal work. Repositories without tags can generate Unreleased notes from their complete history. Empty ranges say that no user-facing changes were documented.
+
+`--from` is excluded and `--to` is included. Reference arguments are resolved as Git commits without passing through a shell. The dashboard listens on loopback only, accepts same-origin JSON requests, and exports through the browser without writing to repositories. Stop it with Ctrl+C. Use `--port <number>` if the default port is occupied.
+
+The package also exports `generateChangelog`, `inspectRepository`, `createChangelogServer`, and `startChangelogDashboard` for integrations. `generateChangelog` returns Markdown, project/version sections, and commit filtering counts.
+
 ## Target-aware budgets
 
 Use a target preset when the pack will be pasted into a specific chat/model family:
@@ -89,6 +108,7 @@ Run `ctxlab` without arguments. The terminal UI now opens with a target selector
 | `r` | Toggle Secret Redaction (API keys & private keys) |
 | `f` | Toggle Output Format (Markdown / JSON) |
 | `Esc` | Clear selection / close modal |
+| `Ctrl+L` | Open the local changelog dashboard service |
 | `q` / `Ctrl+C` | Quit Context Lab |
 
 ## Focused Context & Task-Oriented Packing

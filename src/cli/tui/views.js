@@ -59,6 +59,7 @@ export function renderTargetSelector(state, version) {
   const sep = c.dim + "─".repeat(Math.min(cols - 4, 84)) + c.reset;
   const ver = version ? "v" + version : "v1.3.0";
   const lines = [];
+  lines.push("  " + c.dim + "Ctrl+L · Open changelog workspace" + c.reset);
 
   lines.push("");
   lines.push("  " + c.bold + c.cyan + "◆ CONTEXT LAB ENTERPRISE" + c.reset + " " + c.dim + ver + c.reset + " — " + c.bold + "Select Target LLM Profile" + c.reset);
@@ -555,7 +556,8 @@ export function renderBrowse(state, visible, version) {
     btn("g", "Git Diff"),
     btn("t", "Target"),
     btn("a", "All"),
-    btn("c", "Clear")
+    btn("c", "Clear"),
+    btn("Ctrl+L", "Changelogs")
   ];
 
   lines.push("  " + primaryKeys.join("   "));

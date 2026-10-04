@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { startChangelogDashboard } from "../../changelog/server.js";
 import path from "node:path";
 import readline from "node:readline";
 import { BUDGETS, TARGET_PROFILES, formatTokens } from "../../core/constants.js";
@@ -116,9 +117,15 @@ export function startInteractive(options, root, version) {
   }
   render();
 
-  process.stdin.on("keypress", function (str, key) {
+  process.stdin.on("keypress", function onKeypress(str, key) {
     const k = keyName(key);
     if (key.ctrl && key.name === "c") exitApp(0);
+    if (key.ctrl && key.name === "l") {
+      process.stdin.off("keypress", onKeypress);
+      cleanup();
+      startChangelogDashboard({ root: ROOT });
+      return;
+    }
 
     // MODE: TARGET
     if (state.mode === "target") {

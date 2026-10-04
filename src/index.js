@@ -45,3 +45,7 @@ export {
   redactSecrets,
   loadProjectPresets
 } from "./core/presets.js";
+
+export { generateChangelog } from "./changelog/generate.js";
+export { inspectRepository } from "./changelog/git.js";
+export { createChangelogServer, startChangelogDashboard } from "./changelog/server.js";

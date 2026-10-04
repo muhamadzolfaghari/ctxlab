@@ -1,3 +1,4 @@
+import { handleChangelogCommand } from "./commands/changelog.js";
 import { parseArgs, printHelp, printTargets } from "./args.js";
 import { handlePackCommand } from "./commands/pack.js";
 import { handleApplyCommand } from "./commands/apply.js";
@@ -9,6 +10,7 @@ const DEFAULT_VERSION = "1.3.0";
 export function runCli(argv, version, root) {
   const ROOT = root || process.cwd();
   const currentVersion = version || DEFAULT_VERSION;
+  if (argv[0] === "changelog") return handleChangelogCommand(argv.slice(1), ROOT);
   const options = parseArgs(argv, ROOT);
 
   if (options.help) {
